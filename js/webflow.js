@@ -25,6 +25,10 @@
   var __commonJS = (cb, mod) => function __require2() {
     return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
   };
+  var __export = (target, all) => {
+    for (var name in all)
+      __defProp(target, name, { get: all[name], enumerable: true });
+  };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
       for (let key of __getOwnPropNames(from))
@@ -1403,70 +1407,6 @@
     }
   });
 
-  // shared/render/plugins/BaseSiteModules/webflow-focus-within.js
-  var require_webflow_focus_within = __commonJS({
-    "shared/render/plugins/BaseSiteModules/webflow-focus-within.js"(exports, module) {
-      var Webflow = require_webflow_lib();
-      Webflow.define("focus-within", module.exports = function() {
-        function computeEventPath(node) {
-          var path = [node];
-          var parent = null;
-          while (parent = node.parentNode || node.host || node.defaultView) {
-            path.push(parent);
-            node = parent;
-          }
-          return path;
-        }
-        function addFocusWithinAttribute(el) {
-          if (typeof el.getAttribute !== "function" || el.getAttribute("data-wf-focus-within")) {
-            return;
-          }
-          el.setAttribute("data-wf-focus-within", "true");
-        }
-        function removeFocusWithinAttribute(el) {
-          if (typeof el.getAttribute !== "function" || !el.getAttribute("data-wf-focus-within")) {
-            return;
-          }
-          el.removeAttribute("data-wf-focus-within");
-        }
-        function loadFocusWithinPolyfill() {
-          var handler = function(e) {
-            var running;
-            function action() {
-              running = false;
-              if ("blur" === e.type) {
-                Array.prototype.slice.call(computeEventPath(e.target)).forEach(removeFocusWithinAttribute);
-              }
-              if ("focus" === e.type) {
-                Array.prototype.slice.call(computeEventPath(e.target)).forEach(addFocusWithinAttribute);
-              }
-            }
-            if (!running) {
-              window.requestAnimationFrame(action);
-              running = true;
-            }
-          };
-          document.addEventListener("focus", handler, true);
-          document.addEventListener("blur", handler, true);
-          addFocusWithinAttribute(document.body);
-          return true;
-        }
-        function ready() {
-          if (typeof document !== "undefined" && document.body.hasAttribute("data-wf-focus-within")) {
-            try {
-              document.querySelector(":focus-within");
-            } catch (e) {
-              loadFocusWithinPolyfill();
-            }
-          }
-        }
-        return {
-          ready
-        };
-      });
-    }
-  });
-
   // shared/render/plugins/BaseSiteModules/webflow-focus.js
   var require_webflow_focus = __commonJS({
     "shared/render/plugins/BaseSiteModules/webflow-focus.js"(exports, module) {
@@ -2820,7 +2760,7 @@
         return NullProtoObject();
       };
       hiddenKeys[IE_PROTO] = true;
-      module.exports = Object.create || function create(O, Properties) {
+      module.exports = Object.create || function create2(O, Properties) {
         var result;
         if (O !== null) {
           EmptyConstructor[PROTOTYPE] = anObject(O);
@@ -2838,14 +2778,14 @@
   var require_add_to_unscopables = __commonJS({
     "node_modules/core-js/internals/add-to-unscopables.js"(exports, module) {
       var wellKnownSymbol = require_well_known_symbol();
-      var create = require_object_create();
+      var create2 = require_object_create();
       var definePropertyModule = require_object_define_property();
       var UNSCOPABLES = wellKnownSymbol("unscopables");
       var ArrayPrototype = Array.prototype;
       if (ArrayPrototype[UNSCOPABLES] == void 0) {
         definePropertyModule.f(ArrayPrototype, UNSCOPABLES, {
           configurable: true,
-          value: create(null)
+          value: create2(null)
         });
       }
       module.exports = function(key) {
@@ -2906,17 +2846,17 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_freeGlobal.js
+  // node_modules/lodash/_freeGlobal.js
   var require_freeGlobal = __commonJS({
-    "node_modules/redux/node_modules/lodash/_freeGlobal.js"(exports, module) {
+    "node_modules/lodash/_freeGlobal.js"(exports, module) {
       var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
       module.exports = freeGlobal;
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_root.js
+  // node_modules/lodash/_root.js
   var require_root = __commonJS({
-    "node_modules/redux/node_modules/lodash/_root.js"(exports, module) {
+    "node_modules/lodash/_root.js"(exports, module) {
       var freeGlobal = require_freeGlobal();
       var freeSelf = typeof self == "object" && self && self.Object === Object && self;
       var root = freeGlobal || freeSelf || Function("return this")();
@@ -2924,18 +2864,18 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_Symbol.js
+  // node_modules/lodash/_Symbol.js
   var require_Symbol = __commonJS({
-    "node_modules/redux/node_modules/lodash/_Symbol.js"(exports, module) {
+    "node_modules/lodash/_Symbol.js"(exports, module) {
       var root = require_root();
       var Symbol2 = root.Symbol;
       module.exports = Symbol2;
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_getRawTag.js
+  // node_modules/lodash/_getRawTag.js
   var require_getRawTag = __commonJS({
-    "node_modules/redux/node_modules/lodash/_getRawTag.js"(exports, module) {
+    "node_modules/lodash/_getRawTag.js"(exports, module) {
       var Symbol2 = require_Symbol();
       var objectProto = Object.prototype;
       var hasOwnProperty = objectProto.hasOwnProperty;
@@ -2962,9 +2902,9 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_objectToString.js
+  // node_modules/lodash/_objectToString.js
   var require_objectToString = __commonJS({
-    "node_modules/redux/node_modules/lodash/_objectToString.js"(exports, module) {
+    "node_modules/lodash/_objectToString.js"(exports, module) {
       var objectProto = Object.prototype;
       var nativeObjectToString = objectProto.toString;
       function objectToString(value) {
@@ -2974,9 +2914,9 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_baseGetTag.js
+  // node_modules/lodash/_baseGetTag.js
   var require_baseGetTag = __commonJS({
-    "node_modules/redux/node_modules/lodash/_baseGetTag.js"(exports, module) {
+    "node_modules/lodash/_baseGetTag.js"(exports, module) {
       var Symbol2 = require_Symbol();
       var getRawTag = require_getRawTag();
       var objectToString = require_objectToString();
@@ -2993,9 +2933,9 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_overArg.js
+  // node_modules/lodash/_overArg.js
   var require_overArg = __commonJS({
-    "node_modules/redux/node_modules/lodash/_overArg.js"(exports, module) {
+    "node_modules/lodash/_overArg.js"(exports, module) {
       function overArg(func, transform) {
         return function(arg) {
           return func(transform(arg));
@@ -3005,18 +2945,18 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/_getPrototype.js
+  // node_modules/lodash/_getPrototype.js
   var require_getPrototype = __commonJS({
-    "node_modules/redux/node_modules/lodash/_getPrototype.js"(exports, module) {
+    "node_modules/lodash/_getPrototype.js"(exports, module) {
       var overArg = require_overArg();
       var getPrototype = overArg(Object.getPrototypeOf, Object);
       module.exports = getPrototype;
     }
   });
 
-  // node_modules/redux/node_modules/lodash/isObjectLike.js
+  // node_modules/lodash/isObjectLike.js
   var require_isObjectLike = __commonJS({
-    "node_modules/redux/node_modules/lodash/isObjectLike.js"(exports, module) {
+    "node_modules/lodash/isObjectLike.js"(exports, module) {
       function isObjectLike(value) {
         return value != null && typeof value == "object";
       }
@@ -3024,9 +2964,9 @@
     }
   });
 
-  // node_modules/redux/node_modules/lodash/isPlainObject.js
+  // node_modules/lodash/isPlainObject.js
   var require_isPlainObject = __commonJS({
-    "node_modules/redux/node_modules/lodash/isPlainObject.js"(exports, module) {
+    "node_modules/lodash/isPlainObject.js"(exports, module) {
       var baseGetTag = require_baseGetTag();
       var getPrototype = require_getPrototype();
       var isObjectLike = require_isObjectLike();
@@ -3604,7 +3544,9 @@
         STYLE_BACKGROUND_COLOR: "STYLE_BACKGROUND_COLOR",
         STYLE_BORDER: "STYLE_BORDER",
         STYLE_TEXT_COLOR: "STYLE_TEXT_COLOR",
+        OBJECT_VALUE: "OBJECT_VALUE",
         PLUGIN_LOTTIE: "PLUGIN_LOTTIE",
+        PLUGIN_SPLINE: "PLUGIN_SPLINE",
         GENERAL_DISPLAY: "GENERAL_DISPLAY",
         GENERAL_START_ACTION: "GENERAL_START_ACTION",
         GENERAL_CONTINUOUS_ACTION: "GENERAL_CONTINUOUS_ACTION",
@@ -4584,93 +4526,6 @@
     }
   });
 
-  // node_modules/lodash/_freeGlobal.js
-  var require_freeGlobal2 = __commonJS({
-    "node_modules/lodash/_freeGlobal.js"(exports, module) {
-      var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-      module.exports = freeGlobal;
-    }
-  });
-
-  // node_modules/lodash/_root.js
-  var require_root2 = __commonJS({
-    "node_modules/lodash/_root.js"(exports, module) {
-      var freeGlobal = require_freeGlobal2();
-      var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-      var root = freeGlobal || freeSelf || Function("return this")();
-      module.exports = root;
-    }
-  });
-
-  // node_modules/lodash/_Symbol.js
-  var require_Symbol2 = __commonJS({
-    "node_modules/lodash/_Symbol.js"(exports, module) {
-      var root = require_root2();
-      var Symbol2 = root.Symbol;
-      module.exports = Symbol2;
-    }
-  });
-
-  // node_modules/lodash/_getRawTag.js
-  var require_getRawTag2 = __commonJS({
-    "node_modules/lodash/_getRawTag.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
-      var objectProto = Object.prototype;
-      var hasOwnProperty = objectProto.hasOwnProperty;
-      var nativeObjectToString = objectProto.toString;
-      var symToStringTag = Symbol2 ? Symbol2.toStringTag : void 0;
-      function getRawTag(value) {
-        var isOwn = hasOwnProperty.call(value, symToStringTag), tag = value[symToStringTag];
-        try {
-          value[symToStringTag] = void 0;
-          var unmasked = true;
-        } catch (e) {
-        }
-        var result = nativeObjectToString.call(value);
-        if (unmasked) {
-          if (isOwn) {
-            value[symToStringTag] = tag;
-          } else {
-            delete value[symToStringTag];
-          }
-        }
-        return result;
-      }
-      module.exports = getRawTag;
-    }
-  });
-
-  // node_modules/lodash/_objectToString.js
-  var require_objectToString2 = __commonJS({
-    "node_modules/lodash/_objectToString.js"(exports, module) {
-      var objectProto = Object.prototype;
-      var nativeObjectToString = objectProto.toString;
-      function objectToString(value) {
-        return nativeObjectToString.call(value);
-      }
-      module.exports = objectToString;
-    }
-  });
-
-  // node_modules/lodash/_baseGetTag.js
-  var require_baseGetTag2 = __commonJS({
-    "node_modules/lodash/_baseGetTag.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
-      var getRawTag = require_getRawTag2();
-      var objectToString = require_objectToString2();
-      var nullTag = "[object Null]";
-      var undefinedTag = "[object Undefined]";
-      var symToStringTag = Symbol2 ? Symbol2.toStringTag : void 0;
-      function baseGetTag(value) {
-        if (value == null) {
-          return value === void 0 ? undefinedTag : nullTag;
-        }
-        return symToStringTag && symToStringTag in Object(value) ? getRawTag(value) : objectToString(value);
-      }
-      module.exports = baseGetTag;
-    }
-  });
-
   // node_modules/lodash/isObject.js
   var require_isObject = __commonJS({
     "node_modules/lodash/isObject.js"(exports, module) {
@@ -4685,7 +4540,7 @@
   // node_modules/lodash/isFunction.js
   var require_isFunction = __commonJS({
     "node_modules/lodash/isFunction.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
+      var baseGetTag = require_baseGetTag();
       var isObject = require_isObject();
       var asyncTag = "[object AsyncFunction]";
       var funcTag = "[object Function]";
@@ -4705,7 +4560,7 @@
   // node_modules/lodash/_coreJsData.js
   var require_coreJsData = __commonJS({
     "node_modules/lodash/_coreJsData.js"(exports, module) {
-      var root = require_root2();
+      var root = require_root();
       var coreJsData = root["__core-js_shared__"];
       module.exports = coreJsData;
     }
@@ -4802,7 +4657,7 @@
   var require_Map = __commonJS({
     "node_modules/lodash/_Map.js"(exports, module) {
       var getNative = require_getNative();
-      var root = require_root2();
+      var root = require_root();
       var Map2 = getNative(root, "Map");
       module.exports = Map2;
     }
@@ -5202,7 +5057,7 @@
   // node_modules/lodash/_Uint8Array.js
   var require_Uint8Array = __commonJS({
     "node_modules/lodash/_Uint8Array.js"(exports, module) {
-      var root = require_root2();
+      var root = require_root();
       var Uint8Array2 = root.Uint8Array;
       module.exports = Uint8Array2;
     }
@@ -5239,7 +5094,7 @@
   // node_modules/lodash/_equalByTag.js
   var require_equalByTag = __commonJS({
     "node_modules/lodash/_equalByTag.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
+      var Symbol2 = require_Symbol();
       var Uint8Array2 = require_Uint8Array();
       var eq = require_eq();
       var equalArrays = require_equalArrays();
@@ -5407,21 +5262,11 @@
     }
   });
 
-  // node_modules/lodash/isObjectLike.js
-  var require_isObjectLike2 = __commonJS({
-    "node_modules/lodash/isObjectLike.js"(exports, module) {
-      function isObjectLike(value) {
-        return value != null && typeof value == "object";
-      }
-      module.exports = isObjectLike;
-    }
-  });
-
   // node_modules/lodash/_baseIsArguments.js
   var require_baseIsArguments = __commonJS({
     "node_modules/lodash/_baseIsArguments.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var isObjectLike = require_isObjectLike2();
+      var baseGetTag = require_baseGetTag();
+      var isObjectLike = require_isObjectLike();
       var argsTag = "[object Arguments]";
       function baseIsArguments(value) {
         return isObjectLike(value) && baseGetTag(value) == argsTag;
@@ -5434,7 +5279,7 @@
   var require_isArguments = __commonJS({
     "node_modules/lodash/isArguments.js"(exports, module) {
       var baseIsArguments = require_baseIsArguments();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var objectProto = Object.prototype;
       var hasOwnProperty = objectProto.hasOwnProperty;
       var propertyIsEnumerable = objectProto.propertyIsEnumerable;
@@ -5460,7 +5305,7 @@
   // node_modules/lodash/isBuffer.js
   var require_isBuffer = __commonJS({
     "node_modules/lodash/isBuffer.js"(exports, module) {
-      var root = require_root2();
+      var root = require_root();
       var stubFalse = require_stubFalse();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
       var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
@@ -5500,9 +5345,9 @@
   // node_modules/lodash/_baseIsTypedArray.js
   var require_baseIsTypedArray = __commonJS({
     "node_modules/lodash/_baseIsTypedArray.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
+      var baseGetTag = require_baseGetTag();
       var isLength = require_isLength();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var argsTag = "[object Arguments]";
       var arrayTag = "[object Array]";
       var boolTag = "[object Boolean]";
@@ -5552,7 +5397,7 @@
   // node_modules/lodash/_nodeUtil.js
   var require_nodeUtil = __commonJS({
     "node_modules/lodash/_nodeUtil.js"(exports, module) {
-      var freeGlobal = require_freeGlobal2();
+      var freeGlobal = require_freeGlobal();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
       var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
       var moduleExports = freeModule && freeModule.exports === freeExports;
@@ -5623,22 +5468,10 @@
     }
   });
 
-  // node_modules/lodash/_overArg.js
-  var require_overArg2 = __commonJS({
-    "node_modules/lodash/_overArg.js"(exports, module) {
-      function overArg(func, transform) {
-        return function(arg) {
-          return func(transform(arg));
-        };
-      }
-      module.exports = overArg;
-    }
-  });
-
   // node_modules/lodash/_nativeKeys.js
   var require_nativeKeys = __commonJS({
     "node_modules/lodash/_nativeKeys.js"(exports, module) {
-      var overArg = require_overArg2();
+      var overArg = require_overArg();
       var nativeKeys = overArg(Object.keys, Object);
       module.exports = nativeKeys;
     }
@@ -5763,7 +5596,7 @@
   var require_DataView = __commonJS({
     "node_modules/lodash/_DataView.js"(exports, module) {
       var getNative = require_getNative();
-      var root = require_root2();
+      var root = require_root();
       var DataView = getNative(root, "DataView");
       module.exports = DataView;
     }
@@ -5773,7 +5606,7 @@
   var require_Promise = __commonJS({
     "node_modules/lodash/_Promise.js"(exports, module) {
       var getNative = require_getNative();
-      var root = require_root2();
+      var root = require_root();
       var Promise3 = getNative(root, "Promise");
       module.exports = Promise3;
     }
@@ -5783,7 +5616,7 @@
   var require_Set = __commonJS({
     "node_modules/lodash/_Set.js"(exports, module) {
       var getNative = require_getNative();
-      var root = require_root2();
+      var root = require_root();
       var Set2 = getNative(root, "Set");
       module.exports = Set2;
     }
@@ -5793,7 +5626,7 @@
   var require_WeakMap = __commonJS({
     "node_modules/lodash/_WeakMap.js"(exports, module) {
       var getNative = require_getNative();
-      var root = require_root2();
+      var root = require_root();
       var WeakMap2 = getNative(root, "WeakMap");
       module.exports = WeakMap2;
     }
@@ -5807,7 +5640,7 @@
       var Promise3 = require_Promise();
       var Set2 = require_Set();
       var WeakMap2 = require_WeakMap();
-      var baseGetTag = require_baseGetTag2();
+      var baseGetTag = require_baseGetTag();
       var toSource = require_toSource();
       var mapTag = "[object Map]";
       var objectTag = "[object Object]";
@@ -5900,7 +5733,7 @@
   var require_baseIsEqual = __commonJS({
     "node_modules/lodash/_baseIsEqual.js"(exports, module) {
       var baseIsEqualDeep = require_baseIsEqualDeep();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       function baseIsEqual(value, other, bitmask, customizer, stack) {
         if (value === other) {
           return true;
@@ -6021,8 +5854,8 @@
   // node_modules/lodash/isSymbol.js
   var require_isSymbol = __commonJS({
     "node_modules/lodash/isSymbol.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var isObjectLike = require_isObjectLike2();
+      var baseGetTag = require_baseGetTag();
+      var isObjectLike = require_isObjectLike();
       var symbolTag = "[object Symbol]";
       function isSymbol(value) {
         return typeof value == "symbol" || isObjectLike(value) && baseGetTag(value) == symbolTag;
@@ -6134,7 +5967,7 @@
   // node_modules/lodash/_baseToString.js
   var require_baseToString = __commonJS({
     "node_modules/lodash/_baseToString.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
+      var Symbol2 = require_Symbol();
       var arrayMap = require_arrayMap();
       var isArray = require_isArray();
       var isSymbol = require_isSymbol();
@@ -7113,9 +6946,9 @@
     }
   });
 
-  // packages/systems/ix2/lottie/IX2LottieUtils.js
-  var require_IX2LottieUtils = __commonJS({
-    "packages/systems/ix2/lottie/IX2LottieUtils.js"(exports) {
+  // packages/systems/ix2/plugins/IX2Lottie.js
+  var require_IX2Lottie = __commonJS({
+    "packages/systems/ix2/plugins/IX2Lottie.js"(exports) {
       "use strict";
       Object.defineProperty(exports, "__esModule", {
         value: true
@@ -7171,6 +7004,136 @@
     }
   });
 
+  // packages/systems/ix2/plugins/IX2Spline.js
+  var require_IX2Spline = __commonJS({
+    "packages/systems/ix2/plugins/IX2Spline.js"(exports) {
+      "use strict";
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      exports.renderPlugin = exports.getPluginOrigin = exports.getPluginDuration = exports.getPluginDestination = exports.getPluginConfig = exports.createPluginInstance = exports.clearPlugin = void 0;
+      var queryContainerElement = (elementId) => document.querySelector(`[data-w-id="${elementId}"]`);
+      var getFrontendModule = () => window.Webflow.require("spline");
+      var difference = (arr1, arr2) => arr1.filter((x) => !arr2.includes(x));
+      var getPluginConfig = (actionItemConfig, key) => {
+        return actionItemConfig.value[key];
+      };
+      exports.getPluginConfig = getPluginConfig;
+      var getPluginDuration = () => {
+        return null;
+      };
+      exports.getPluginDuration = getPluginDuration;
+      var DEFAULT_VALUES = Object.freeze({
+        positionX: 0,
+        positionY: 0,
+        positionZ: 0,
+        rotationX: 0,
+        rotationY: 0,
+        rotationZ: 0,
+        scaleX: 1,
+        scaleY: 1,
+        scaleZ: 1
+      });
+      var getPluginOrigin = (refState, actionItem) => {
+        const destination = actionItem.config.value;
+        const destinationKeys = Object.keys(destination);
+        if (refState) {
+          const stateKeys = Object.keys(refState);
+          const diffKeys = difference(destinationKeys, stateKeys);
+          if (diffKeys.length) {
+            const origin2 = diffKeys.reduce((result, key) => {
+              result[key] = DEFAULT_VALUES[key];
+              return result;
+            }, refState);
+            return origin2;
+          }
+          return refState;
+        }
+        const origin = destinationKeys.reduce((result, key) => {
+          result[key] = DEFAULT_VALUES[key];
+          return result;
+        }, {});
+        return origin;
+      };
+      exports.getPluginOrigin = getPluginOrigin;
+      var getPluginDestination = (actionItemConfig) => {
+        return actionItemConfig.value;
+      };
+      exports.getPluginDestination = getPluginDestination;
+      var createPluginInstance = (element, actionItem) => {
+        var _actionItem$config, _actionItem$config$ta;
+        const pluginElementId = actionItem === null || actionItem === void 0 ? void 0 : (_actionItem$config = actionItem.config) === null || _actionItem$config === void 0 ? void 0 : (_actionItem$config$ta = _actionItem$config.target) === null || _actionItem$config$ta === void 0 ? void 0 : _actionItem$config$ta.pluginElement;
+        return pluginElementId ? queryContainerElement(pluginElementId) : null;
+      };
+      exports.createPluginInstance = createPluginInstance;
+      var renderPlugin = (containerElement, refState, actionItem) => {
+        const instance = getFrontendModule().getInstance(containerElement);
+        const objectId = actionItem.config.target.objectId;
+        if (!instance || !objectId) {
+          return;
+        }
+        const obj = instance.spline.findObjectById(objectId);
+        if (!obj) {
+          return;
+        }
+        const {
+          PLUGIN_SPLINE: props
+        } = refState;
+        if (props.positionX != null) {
+          obj.position.x = props.positionX;
+        }
+        if (props.positionY != null) {
+          obj.position.y = props.positionY;
+        }
+        if (props.positionZ != null) {
+          obj.position.z = props.positionZ;
+        }
+        if (props.rotationX != null) {
+          obj.rotation.x = props.rotationX;
+        }
+        if (props.rotationY != null) {
+          obj.rotation.y = props.rotationY;
+        }
+        if (props.rotationZ != null) {
+          obj.rotation.z = props.rotationZ;
+        }
+        if (props.scaleX != null) {
+          obj.scale.x = props.scaleX;
+        }
+        if (props.scaleY != null) {
+          obj.scale.y = props.scaleY;
+        }
+        if (props.scaleZ != null) {
+          obj.scale.z = props.scaleZ;
+        }
+      };
+      exports.renderPlugin = renderPlugin;
+      var clearPlugin = () => {
+        return null;
+      };
+      exports.clearPlugin = clearPlugin;
+    }
+  });
+
+  // packages/systems/ix2/plugins/index.js
+  var require_plugins = __commonJS({
+    "packages/systems/ix2/plugins/index.js"(exports) {
+      "use strict";
+      var _interopRequireWildcard = require_interopRequireWildcard().default;
+      var _interopRequireDefault = require_interopRequireDefault().default;
+      Object.defineProperty(exports, "__esModule", {
+        value: true
+      });
+      exports.pluginMethodMap = void 0;
+      var _extends2 = _interopRequireDefault(require_extends());
+      var _constants = require_constants();
+      var lottie = _interopRequireWildcard(require_IX2Lottie());
+      var spline = _interopRequireWildcard(require_IX2Spline());
+      var pluginMethodMap = /* @__PURE__ */ new Map([[_constants.ActionTypeConsts.PLUGIN_LOTTIE, (0, _extends2.default)({}, lottie)], [_constants.ActionTypeConsts.PLUGIN_SPLINE, (0, _extends2.default)({}, spline)]]);
+      exports.pluginMethodMap = pluginMethodMap;
+    }
+  });
+
   // packages/systems/ix2/shared/logic/IX2VanillaPlugins.js
   var require_IX2VanillaPlugins = __commonJS({
     "packages/systems/ix2/shared/logic/IX2VanillaPlugins.js"(exports) {
@@ -7181,28 +7144,16 @@
       exports.getPluginOrigin = exports.getPluginDuration = exports.getPluginDestination = exports.getPluginConfig = exports.createPluginInstance = exports.clearPlugin = void 0;
       exports.isPluginType = isPluginType;
       exports.renderPlugin = void 0;
-      var _IX2LottieUtils = require_IX2LottieUtils();
-      var _constants = require_constants();
       var _IX2BrowserSupport = require_IX2BrowserSupport();
-      var pluginMethodMap = {
-        [_constants.ActionTypeConsts.PLUGIN_LOTTIE]: {
-          getConfig: _IX2LottieUtils.getPluginConfig,
-          getOrigin: _IX2LottieUtils.getPluginOrigin,
-          getDuration: _IX2LottieUtils.getPluginDuration,
-          getDestination: _IX2LottieUtils.getPluginDestination,
-          createInstance: _IX2LottieUtils.createPluginInstance,
-          render: _IX2LottieUtils.renderPlugin,
-          clear: _IX2LottieUtils.clearPlugin
-        }
-      };
+      var _plugins = require_plugins();
       function isPluginType(actionTypeId) {
-        return actionTypeId === _constants.ActionTypeConsts.PLUGIN_LOTTIE;
+        return _plugins.pluginMethodMap.has(actionTypeId);
       }
       var pluginMethod = (methodName) => (actionTypeId) => {
         if (!_IX2BrowserSupport.IS_BROWSER_ENV) {
           return () => null;
         }
-        const plugin = pluginMethodMap[actionTypeId];
+        const plugin = _plugins.pluginMethodMap.get(actionTypeId);
         if (!plugin) {
           throw new Error(`IX2 no plugin configured for: ${actionTypeId}`);
         }
@@ -7212,19 +7163,19 @@
         }
         return method;
       };
-      var getPluginConfig = pluginMethod("getConfig");
+      var getPluginConfig = pluginMethod("getPluginConfig");
       exports.getPluginConfig = getPluginConfig;
-      var getPluginOrigin = pluginMethod("getOrigin");
+      var getPluginOrigin = pluginMethod("getPluginOrigin");
       exports.getPluginOrigin = getPluginOrigin;
-      var getPluginDuration = pluginMethod("getDuration");
+      var getPluginDuration = pluginMethod("getPluginDuration");
       exports.getPluginDuration = getPluginDuration;
-      var getPluginDestination = pluginMethod("getDestination");
+      var getPluginDestination = pluginMethod("getPluginDestination");
       exports.getPluginDestination = getPluginDestination;
-      var createPluginInstance = pluginMethod("createInstance");
+      var createPluginInstance = pluginMethod("createPluginInstance");
       exports.createPluginInstance = createPluginInstance;
-      var renderPlugin = pluginMethod("render");
+      var renderPlugin = pluginMethod("renderPlugin");
       exports.renderPlugin = renderPlugin;
-      var clearPlugin = pluginMethod("clear");
+      var clearPlugin = pluginMethod("clearPlugin");
       exports.clearPlugin = clearPlugin;
     }
   });
@@ -7443,6 +7394,7 @@
       });
       exports.cleanupHTMLElement = cleanupHTMLElement;
       exports.clearAllStyles = clearAllStyles;
+      exports.clearObjectCache = clearObjectCache;
       exports.getActionListProgress = getActionListProgress;
       exports.getAffectedElements = getAffectedElements;
       exports.getComputedStyle = getComputedStyle;
@@ -7524,9 +7476,9 @@
         STYLE_BACKGROUND_COLOR,
         STYLE_BORDER,
         STYLE_TEXT_COLOR,
-        GENERAL_DISPLAY
+        GENERAL_DISPLAY,
+        OBJECT_VALUE
       } = _constants.ActionTypeConsts;
-      var OBJECT_VALUE = "OBJECT_VALUE";
       var trim = (v) => v.trim();
       var colorStyleProps = Object.freeze({
         [STYLE_BACKGROUND_COLOR]: BACKGROUND_COLOR,
@@ -7543,7 +7495,10 @@
         [HEIGHT]: HEIGHT,
         [FONT_VARIATION_SETTINGS]: FONT_VARIATION_SETTINGS
       });
-      var objectCache = {};
+      var objectCache = /* @__PURE__ */ new Map();
+      function clearObjectCache() {
+        objectCache.clear();
+      }
       var instanceCount = 1;
       function getInstanceId() {
         return "i" + instanceCount++;
@@ -7698,7 +7653,7 @@
           useEventTarget
         } = normalizeTarget(target);
         if (objectId) {
-          const ref = objectCache[objectId] || (objectCache[objectId] = {});
+          const ref = objectCache.has(objectId) ? objectCache.get(objectId) : objectCache.set(objectId, {}).get(objectId);
           return [ref];
         }
         if (appliesTo === _constants.EventAppliesTo.PAGE) {
@@ -7799,7 +7754,7 @@
           actionTypeId
         } = actionItem;
         if ((0, _IX2VanillaPlugins.isPluginType)(actionTypeId)) {
-          return (0, _IX2VanillaPlugins.getPluginOrigin)(actionTypeId)(refState[actionTypeId]);
+          return (0, _IX2VanillaPlugins.getPluginOrigin)(actionTypeId)(refState[actionTypeId], actionItem);
         }
         switch (actionItem.actionTypeId) {
           case TRANSFORM_MOVE:
@@ -8557,6 +8512,9 @@
         if (typeof target === "string") {
           return target;
         }
+        if (target.pluginElement && target.objectId) {
+          return target.pluginElement + BAR_DELIMITER + target.objectId;
+        }
         const {
           id = "",
           selector = "",
@@ -9004,9 +8962,9 @@
   // node_modules/lodash/isString.js
   var require_isString = __commonJS({
     "node_modules/lodash/isString.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
+      var baseGetTag = require_baseGetTag();
       var isArray = require_isArray();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var stringTag = "[object String]";
       function isString(value) {
         return typeof value == "string" || !isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag;
@@ -9251,20 +9209,11 @@
     }
   });
 
-  // node_modules/lodash/_getPrototype.js
-  var require_getPrototype2 = __commonJS({
-    "node_modules/lodash/_getPrototype.js"(exports, module) {
-      var overArg = require_overArg2();
-      var getPrototype = overArg(Object.getPrototypeOf, Object);
-      module.exports = getPrototype;
-    }
-  });
-
   // node_modules/lodash/_getSymbolsIn.js
   var require_getSymbolsIn = __commonJS({
     "node_modules/lodash/_getSymbolsIn.js"(exports, module) {
       var arrayPush = require_arrayPush();
-      var getPrototype = require_getPrototype2();
+      var getPrototype = require_getPrototype();
       var getSymbols = require_getSymbols();
       var stubArray = require_stubArray();
       var nativeGetSymbols = Object.getOwnPropertySymbols;
@@ -9485,7 +9434,7 @@
   // node_modules/lodash/now.js
   var require_now = __commonJS({
     "node_modules/lodash/now.js"(exports, module) {
-      var root = require_root2();
+      var root = require_root();
       var now = function() {
         return root.Date.now();
       };
@@ -10024,7 +9973,7 @@
   // node_modules/lodash/_isFlattenable.js
   var require_isFlattenable = __commonJS({
     "node_modules/lodash/_isFlattenable.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
+      var Symbol2 = require_Symbol();
       var isArguments = require_isArguments();
       var isArray = require_isArray();
       var spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : void 0;
@@ -10318,7 +10267,7 @@
       var LodashWrapper = require_LodashWrapper();
       var baseLodash = require_baseLodash();
       var isArray = require_isArray();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var wrapperClone = require_wrapperClone();
       var objectProto = Object.prototype;
       var hasOwnProperty = objectProto.hasOwnProperty;
@@ -11170,6 +11119,7 @@
         getNamespacedParameterId,
         shouldAllowMediaQuery,
         cleanupHTMLElement,
+        clearObjectCache,
         stringifyTarget,
         mediaQueriesEqual,
         shallowEqual
@@ -11403,6 +11353,7 @@
             eventListeners
           } = ixSession;
           eventListeners.forEach(clearEventListener);
+          clearObjectCache();
           store.dispatch((0, _IX2EngineActions.sessionStopped)());
         }
       }
@@ -12163,11 +12114,8 @@
               refState
             } = ixElements[elementId] || {};
             const actionState = refState && refState[actionTypeId];
-            switch (refType) {
-              case HTML_ELEMENT: {
-                renderHTMLElement(ref, refState, actionState, eventId, actionItem, styleProp, elementApi, renderType, pluginInstance);
-                break;
-              }
+            if (refType === HTML_ELEMENT || isPluginType(actionTypeId)) {
+              renderHTMLElement(ref, refState, actionState, eventId, actionItem, styleProp, elementApi, renderType, pluginInstance);
             }
           }
           if (complete) {
@@ -13057,8 +13005,8 @@
           var boundFunction = bind2(callbackfn, that);
           var length = lengthOfArrayLike(self2);
           var index = 0;
-          var create = specificCreate || arraySpeciesCreate;
-          var target = IS_MAP ? create($this, length) : IS_FILTER || IS_FILTER_REJECT ? create($this, 0) : void 0;
+          var create2 = specificCreate || arraySpeciesCreate;
+          var target = IS_MAP ? create2($this, length) : IS_FILTER || IS_FILTER_REJECT ? create2($this, 0) : void 0;
           var value, result;
           for (; length > index; index++)
             if (NO_HOLES || index in self2) {
@@ -13244,7 +13192,7 @@
         });
         return O;
       };
-      var $create = function create(O, Properties) {
+      var $create = function create2(O, Properties) {
         return Properties === void 0 ? nativeObjectCreate(O) : $defineProperties(nativeObjectCreate(O), Properties);
       };
       var $propertyIsEnumerable = function propertyIsEnumerable(V) {
@@ -13749,7 +13697,7 @@
       "use strict";
       var fails = require_fails();
       var isCallable = require_is_callable();
-      var create = require_object_create();
+      var create2 = require_object_create();
       var getPrototypeOf = require_object_get_prototype_of();
       var redefine = require_redefine();
       var wellKnownSymbol = require_well_known_symbol();
@@ -13776,7 +13724,7 @@
       if (NEW_ITERATOR_PROTOTYPE)
         IteratorPrototype = {};
       else if (IS_PURE)
-        IteratorPrototype = create(IteratorPrototype);
+        IteratorPrototype = create2(IteratorPrototype);
       if (!isCallable(IteratorPrototype[ITERATOR])) {
         redefine(IteratorPrototype, ITERATOR, function() {
           return this;
@@ -13794,18 +13742,18 @@
     "node_modules/core-js/internals/create-iterator-constructor.js"(exports, module) {
       "use strict";
       var IteratorPrototype = require_iterators_core().IteratorPrototype;
-      var create = require_object_create();
+      var create2 = require_object_create();
       var createPropertyDescriptor = require_create_property_descriptor();
       var setToStringTag = require_set_to_string_tag();
       var Iterators = require_iterators();
-      var returnThis = function() {
+      var returnThis2 = function() {
         return this;
       };
       module.exports = function(IteratorConstructor, NAME, next) {
         var TO_STRING_TAG = NAME + " Iterator";
-        IteratorConstructor.prototype = create(IteratorPrototype, { next: createPropertyDescriptor(1, next) });
+        IteratorConstructor.prototype = create2(IteratorPrototype, { next: createPropertyDescriptor(1, next) });
         setToStringTag(IteratorConstructor, TO_STRING_TAG, false, true);
-        Iterators[TO_STRING_TAG] = returnThis;
+        Iterators[TO_STRING_TAG] = returnThis2;
         return IteratorConstructor;
       };
     }
@@ -13881,7 +13829,7 @@
       var KEYS = "keys";
       var VALUES = "values";
       var ENTRIES = "entries";
-      var returnThis = function() {
+      var returnThis2 = function() {
         return this;
       };
       module.exports = function(Iterable, NAME, IteratorConstructor, next, DEFAULT, IS_SET, FORCED) {
@@ -13923,12 +13871,12 @@
               if (setPrototypeOf) {
                 setPrototypeOf(CurrentIteratorPrototype, IteratorPrototype);
               } else if (!isCallable(CurrentIteratorPrototype[ITERATOR])) {
-                redefine(CurrentIteratorPrototype, ITERATOR, returnThis);
+                redefine(CurrentIteratorPrototype, ITERATOR, returnThis2);
               }
             }
             setToStringTag(CurrentIteratorPrototype, TO_STRING_TAG, true, true);
             if (IS_PURE)
-              Iterators[TO_STRING_TAG] = returnThis;
+              Iterators[TO_STRING_TAG] = returnThis2;
           }
         }
         if (PROPER_FUNCTION_NAME && DEFAULT == VALUES && nativeIterator && nativeIterator.name !== VALUES) {
@@ -14362,7 +14310,7 @@
         return !(Array2.of.call(F) instanceof F);
       });
       $2({ target: "Array", stat: true, forced: ISNT_GENERIC }, {
-        of: function of() {
+        of: function of2() {
           var index = 0;
           var argumentsLength = arguments.length;
           var result = new (isConstructor(this) ? this : Array2)(argumentsLength);
@@ -15407,23 +15355,23 @@
           // weak collections IDs
         } });
       };
-      var fastKey = function(it, create) {
+      var fastKey = function(it, create2) {
         if (!isObject(it))
           return typeof it == "symbol" ? it : (typeof it == "string" ? "S" : "P") + it;
         if (!hasOwn(it, METADATA)) {
           if (!isExtensible(it))
             return "F";
-          if (!create)
+          if (!create2)
             return "E";
           setMetadata(it);
         }
         return it[METADATA].objectID;
       };
-      var getWeakData = function(it, create) {
+      var getWeakData = function(it, create2) {
         if (!hasOwn(it, METADATA)) {
           if (!isExtensible(it))
             return true;
-          if (!create)
+          if (!create2)
             return false;
           setMetadata(it);
         }
@@ -15690,7 +15638,7 @@
     "node_modules/core-js/internals/collection-strong.js"(exports, module) {
       "use strict";
       var defineProperty = require_object_define_property().f;
-      var create = require_object_create();
+      var create2 = require_object_create();
       var redefineAll = require_redefine_all();
       var bind2 = require_function_bind_context();
       var anInstance = require_an_instance();
@@ -15708,7 +15656,7 @@
             anInstance(that, Prototype);
             setInternalState(that, {
               type: CONSTRUCTOR_NAME,
-              index: create(null),
+              index: create2(null),
               first: void 0,
               last: void 0,
               size: 0
@@ -16621,7 +16569,7 @@
       var global2 = require_global();
       var shared = require_shared_store();
       var isCallable = require_is_callable();
-      var create = require_object_create();
+      var create2 = require_object_create();
       var getPrototypeOf = require_object_get_prototype_of();
       var redefine = require_redefine();
       var wellKnownSymbol = require_well_known_symbol();
@@ -16647,7 +16595,7 @@
       if (!AsyncIteratorPrototype)
         AsyncIteratorPrototype = {};
       else if (IS_PURE)
-        AsyncIteratorPrototype = create(AsyncIteratorPrototype);
+        AsyncIteratorPrototype = create2(AsyncIteratorPrototype);
       if (!isCallable(AsyncIteratorPrototype[ASYNC_ITERATOR])) {
         redefine(AsyncIteratorPrototype, ASYNC_ITERATOR, function() {
           return this;
@@ -16663,7 +16611,7 @@
       "use strict";
       var apply = require_function_apply();
       var anObject = require_an_object();
-      var create = require_object_create();
+      var create2 = require_object_create();
       var getMethod = require_get_method();
       var redefineAll = require_redefine_all();
       var InternalStateModule = require_internal_state();
@@ -16684,7 +16632,7 @@
           next: iterator.next
         });
       };
-      AsyncFromSyncIterator.prototype = redefineAll(create(AsyncIteratorPrototype), {
+      AsyncFromSyncIterator.prototype = redefineAll(create2(AsyncIteratorPrototype), {
         next: function next(arg) {
           var state = getInternalState(this);
           var hasArg = !!arguments.length;
@@ -19501,7 +19449,7 @@
           }
         }, {
           key: "of",
-          value: function of() {
+          value: function of2() {
             for (var _len2 = arguments.length, items = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
               items[_key2] = arguments[_key2];
             }
@@ -30705,7 +30653,7 @@
   // node_modules/lodash/_cloneBuffer.js
   var require_cloneBuffer = __commonJS({
     "node_modules/lodash/_cloneBuffer.js"(exports, module) {
-      var root = require_root2();
+      var root = require_root();
       var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
       var freeModule = freeExports && typeof module == "object" && module && !module.nodeType && module;
       var moduleExports = freeModule && freeModule.exports === freeExports;
@@ -30752,7 +30700,7 @@
   var require_initCloneObject = __commonJS({
     "node_modules/lodash/_initCloneObject.js"(exports, module) {
       var baseCreate = require_baseCreate();
-      var getPrototype = require_getPrototype2();
+      var getPrototype = require_getPrototype();
       var isPrototype = require_isPrototype();
       function initCloneObject(object) {
         return typeof object.constructor == "function" && !isPrototype(object) ? baseCreate(getPrototype(object)) : {};
@@ -30765,38 +30713,11 @@
   var require_isArrayLikeObject = __commonJS({
     "node_modules/lodash/isArrayLikeObject.js"(exports, module) {
       var isArrayLike = require_isArrayLike();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       function isArrayLikeObject(value) {
         return isObjectLike(value) && isArrayLike(value);
       }
       module.exports = isArrayLikeObject;
-    }
-  });
-
-  // node_modules/lodash/isPlainObject.js
-  var require_isPlainObject2 = __commonJS({
-    "node_modules/lodash/isPlainObject.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var getPrototype = require_getPrototype2();
-      var isObjectLike = require_isObjectLike2();
-      var objectTag = "[object Object]";
-      var funcProto = Function.prototype;
-      var objectProto = Object.prototype;
-      var funcToString = funcProto.toString;
-      var hasOwnProperty = objectProto.hasOwnProperty;
-      var objectCtorString = funcToString.call(Object);
-      function isPlainObject(value) {
-        if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
-          return false;
-        }
-        var proto = getPrototype(value);
-        if (proto === null) {
-          return true;
-        }
-        var Ctor = hasOwnProperty.call(proto, "constructor") && proto.constructor;
-        return typeof Ctor == "function" && Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString;
-      }
-      module.exports = isPlainObject;
     }
   });
 
@@ -30869,7 +30790,7 @@
       var isBuffer = require_isBuffer();
       var isFunction = require_isFunction();
       var isObject = require_isObject();
-      var isPlainObject = require_isPlainObject2();
+      var isPlainObject = require_isPlainObject();
       var isTypedArray = require_isTypedArray();
       var safeGet = require_safeGet();
       var toPlainObject = require_toPlainObject();
@@ -37233,9 +37154,9 @@
       });
       exports.of = exports.getConst = exports.ConstType = exports.Const = void 0;
       var {
-        create
+        create: create2
       } = Object;
-      var VALUE = "@webflow/Const/value";
+      var VALUE2 = "@webflow/Const/value";
       var ConstType = class {
       };
       exports.ConstType = ConstType;
@@ -37246,16 +37167,16 @@
         }
       };
       var Const = (value) => {
-        const object = create(prototype);
-        object[VALUE] = value;
+        const object = create2(prototype);
+        object[VALUE2] = value;
         return object;
       };
       exports.Const = Const;
-      var of = Const;
-      exports.of = of;
+      var of2 = Const;
+      exports.of = of2;
       var getConst = (con) => (
         // $FlowFixMe
-        con[VALUE]
+        con[VALUE2]
       );
       exports.getConst = getConst;
     }
@@ -37270,52 +37191,51 @@
       });
       exports.runIdentity = exports.of = exports.IdentityType = exports.Identity = void 0;
       var {
-        create
+        create: create2
       } = Object;
-      var VALUE = "@webflow/Identity/value";
+      var VALUE2 = "@webflow/Identity/value";
       var IdentityType = class {
       };
       exports.IdentityType = IdentityType;
       var prototype = {
         map(f) {
-          return Identity(f(this[VALUE]));
+          return Identity(f(this[VALUE2]));
         }
       };
       var Identity = (value) => {
-        const object = create(prototype);
-        object[VALUE] = value;
+        const object = create2(prototype);
+        object[VALUE2] = value;
         return object;
       };
       exports.Identity = Identity;
-      var of = Identity;
-      exports.of = of;
+      var of2 = Identity;
+      exports.of = of2;
       var runIdentity = (object) => (
         // $FlowFixMe
-        object[VALUE]
+        object[VALUE2]
       );
       exports.runIdentity = runIdentity;
     }
   });
 
-  // packages/utilities/fp/option/index.js
-  var require_option = __commonJS({
-    "packages/utilities/fp/option/index.js"(exports) {
-      "use strict";
-      Object.defineProperty(exports, "__esModule", {
-        value: true
-      });
-      exports.of = exports.maybe = exports.fromNullable = exports.Some = exports.Option = exports.None = void 0;
-      var {
-        create
-      } = Object;
-      var returnThis = function() {
+  // packages/utilities/fp/option/index.ts
+  var option_exports = {};
+  __export(option_exports, {
+    None: () => None,
+    Some: () => Some,
+    fromNullable: () => fromNullable,
+    maybe: () => maybe,
+    of: () => of
+  });
+  var create, returnThis, VALUE, None, Some, SomePrototype, fromNullable, maybe, of;
+  var init_option = __esm({
+    "packages/utilities/fp/option/index.ts"() {
+      ({ create } = Object);
+      returnThis = function() {
         return this;
       };
-      var VALUE = "@webflow/Option";
-      var Option = class {
-      };
-      exports.Option = Option;
-      var None = create({
+      VALUE = "@webflow/Option";
+      None = create({
         map: returnThis,
         chain: returnThis,
         alt: (alternativeOption) => alternativeOption,
@@ -37326,14 +37246,12 @@
          */
         foldOption: (fallback) => fallback
       });
-      exports.None = None;
-      var Some = (value) => {
+      Some = (value) => {
         const object = create(SomePrototype);
         object[VALUE] = value;
         return object;
       };
-      exports.Some = Some;
-      var SomePrototype = {
+      SomePrototype = {
         /**
          * Transform the value inside of a `Option` by applying a unary function to it.
          */
@@ -37359,7 +37277,13 @@
           return m.map(this[VALUE]);
         },
         concat(other) {
-          return other.foldOption(this, (otherValue) => Some(this[VALUE].concat(otherValue)));
+          return other.foldOption(
+            this,
+            (otherValue) => (
+              // @ts-expect-error - TS7053 - Element implicitly has an 'any' type because expression of type '"@webflow/Option"' can't be used to index type '{ readonly map: (f: any) => any; readonly chain: (f: any) => any; readonly alt: () => any; readonly ap: (m: any) => any; readonly concat: (other: any) => any; readonly foldOption: (fallback: any, mapValue: any) => any; }'.
+              Some(this[VALUE].concat(otherValue))
+            )
+          );
         },
         /**
          * Applies a function to the value contained in an `Option`
@@ -37369,15 +37293,13 @@
           return mapValue(this[VALUE]);
         }
       };
-      var fromNullable = (value) => value == null ? None : Some(value);
-      exports.fromNullable = fromNullable;
-      var maybe = (fallback) => (mapValue) => (option) => (
-        // $FlowIgnore private foldOption
+      fromNullable = (value) => value == null ? None : Some(value);
+      maybe = (fallback) => (mapValue) => (option) => (
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore private foldOption
         option.foldOption(fallback, mapValue)
       );
-      exports.maybe = maybe;
-      var of = Some;
-      exports.of = of;
+      of = Some;
     }
   });
 
@@ -37390,55 +37312,55 @@
       });
       exports.of = exports.either = exports.Result = exports.Ok = exports.Err = void 0;
       var {
-        create
+        create: create2
       } = Object;
-      var returnThis = function() {
+      var returnThis2 = function() {
         return this;
       };
-      var VALUE = "@webflow/Result/value";
+      var VALUE2 = "@webflow/Result/value";
       var ERROR = "@webflow/Result/error";
       var Result = class {
       };
       exports.Result = Result;
       var Err = (error) => {
-        const object = create(ErrPrototype);
+        const object = create2(ErrPrototype);
         object[ERROR] = error;
         return object;
       };
       exports.Err = Err;
       var Ok = (value) => {
-        const object = create(OkPrototype);
-        object[VALUE] = value;
+        const object = create2(OkPrototype);
+        object[VALUE2] = value;
         return object;
       };
       exports.Ok = Ok;
       var ErrPrototype = {};
       var OkPrototype = {};
-      ErrPrototype.map = returnThis;
+      ErrPrototype.map = returnThis2;
       OkPrototype.map = function(f) {
-        return Ok(f(this[VALUE]));
+        return Ok(f(this[VALUE2]));
       };
-      ErrPrototype.chain = returnThis;
+      ErrPrototype.chain = returnThis2;
       OkPrototype.chain = function(f) {
-        return f(this[VALUE]);
+        return f(this[VALUE2]);
       };
-      ErrPrototype.ap = returnThis;
+      ErrPrototype.ap = returnThis2;
       OkPrototype.ap = function(m) {
-        return m.map(this[VALUE]);
+        return m.map(this[VALUE2]);
       };
       ErrPrototype.foldResult = function(errorHandler) {
         return errorHandler(this[ERROR]);
       };
       OkPrototype.foldResult = function(errorHandler, valueHandler) {
-        return valueHandler(this[VALUE]);
+        return valueHandler(this[VALUE2]);
       };
       var either = (mapErr) => (mapVal) => (result) => (
         // $FlowIgnore private foldResult
         result.foldResult(mapErr, mapVal)
       );
       exports.either = either;
-      var of = Ok;
-      exports.of = of;
+      var of2 = Ok;
+      exports.of = of2;
     }
   });
 
@@ -37454,7 +37376,7 @@
       exports.zipWith = void 0;
       var _Const = require_Const();
       var _Identity = require_Identity();
-      var _option = require_option();
+      var _option = (init_option(), __toCommonJS(option_exports));
       var _result = require_result();
       var hasOwn = Object.prototype.hasOwnProperty;
       var objectKeys = Object.keys;
@@ -37852,7 +37774,12 @@
       var optionToArray = (0, _option.maybe)(emptyArray)(Array.of);
       exports.optionToArray = optionToArray;
       var optionOfEmptyArray = (0, _option.Some)(emptyArray);
-      var traverseOptions = (f) => (xs) => xs.reduce((option, x) => f(x).map(append).ap(option), optionOfEmptyArray);
+      var traverseOptions = (f) => (xs) => xs.reduce(
+        // $FlowFixMe
+        (option, x) => f(x).map(append).ap(option),
+        // $FlowFixMe
+        optionOfEmptyArray
+      );
       exports.traverseOptions = traverseOptions;
       var resultOfEmptyArray = (0, _result.Ok)(emptyArray);
       var traverseResults = (f) => (xs) => xs.reduce((result, x) => f(x).map(append).ap(result), resultOfEmptyArray);
@@ -38501,7 +38428,7 @@
       exports.ECOMM_STANDARD_MAX_NUM_USERS = ECOMM_STANDARD_MAX_NUM_USERS;
       var ECOMM_PLUS_MAX_NUM_USERS = 2e4;
       exports.ECOMM_PLUS_MAX_NUM_USERS = ECOMM_PLUS_MAX_NUM_USERS;
-      var HARD_LIMIT_MAX_NUM_USERS = 5e4;
+      var HARD_LIMIT_MAX_NUM_USERS = 100 * 1e3;
       exports.HARD_LIMIT_MAX_NUM_USERS = HARD_LIMIT_MAX_NUM_USERS;
       var SUBSCRIPTION_USER_LIMITS = {
         free: STARTER_MAX_NUM_USERS,
@@ -44799,9 +44726,9 @@
     }
   });
 
-  // node_modules/lru-cache/node_modules/yallist/iterator.js
+  // node_modules/yallist/iterator.js
   var require_iterator = __commonJS({
-    "node_modules/lru-cache/node_modules/yallist/iterator.js"(exports, module) {
+    "node_modules/yallist/iterator.js"(exports, module) {
       "use strict";
       module.exports = function(Yallist) {
         Yallist.prototype[Symbol.iterator] = function* () {
@@ -44813,9 +44740,9 @@
     }
   });
 
-  // node_modules/lru-cache/node_modules/yallist/yallist.js
+  // node_modules/yallist/yallist.js
   var require_yallist = __commonJS({
-    "node_modules/lru-cache/node_modules/yallist/yallist.js"(exports, module) {
+    "node_modules/yallist/yallist.js"(exports, module) {
       "use strict";
       module.exports = Yallist;
       Yallist.Node = Node;
@@ -45455,100 +45382,13 @@
   // node_modules/lodash/isBoolean.js
   var require_isBoolean = __commonJS({
     "node_modules/lodash/isBoolean.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var isObjectLike = require_isObjectLike2();
+      var baseGetTag = require_baseGetTag();
+      var isObjectLike = require_isObjectLike();
       var boolTag = "[object Boolean]";
       function isBoolean(value) {
         return value === true || value === false || isObjectLike(value) && baseGetTag(value) == boolTag;
       }
       module.exports = isBoolean;
-    }
-  });
-
-  // node_modules/lodash/_baseIsDate.js
-  var require_baseIsDate = __commonJS({
-    "node_modules/lodash/_baseIsDate.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var isObjectLike = require_isObjectLike2();
-      var dateTag = "[object Date]";
-      function baseIsDate(value) {
-        return isObjectLike(value) && baseGetTag(value) == dateTag;
-      }
-      module.exports = baseIsDate;
-    }
-  });
-
-  // node_modules/lodash/isDate.js
-  var require_isDate = __commonJS({
-    "node_modules/lodash/isDate.js"(exports, module) {
-      var baseIsDate = require_baseIsDate();
-      var baseUnary = require_baseUnary();
-      var nodeUtil = require_nodeUtil();
-      var nodeIsDate = nodeUtil && nodeUtil.isDate;
-      var isDate = nodeIsDate ? baseUnary(nodeIsDate) : baseIsDate;
-      module.exports = isDate;
-    }
-  });
-
-  // node_modules/lodash/_baseToPairs.js
-  var require_baseToPairs = __commonJS({
-    "node_modules/lodash/_baseToPairs.js"(exports, module) {
-      var arrayMap = require_arrayMap();
-      function baseToPairs(object, props) {
-        return arrayMap(props, function(key) {
-          return [key, object[key]];
-        });
-      }
-      module.exports = baseToPairs;
-    }
-  });
-
-  // node_modules/lodash/_setToPairs.js
-  var require_setToPairs = __commonJS({
-    "node_modules/lodash/_setToPairs.js"(exports, module) {
-      function setToPairs(set) {
-        var index = -1, result = Array(set.size);
-        set.forEach(function(value) {
-          result[++index] = [value, value];
-        });
-        return result;
-      }
-      module.exports = setToPairs;
-    }
-  });
-
-  // node_modules/lodash/_createToPairs.js
-  var require_createToPairs = __commonJS({
-    "node_modules/lodash/_createToPairs.js"(exports, module) {
-      var baseToPairs = require_baseToPairs();
-      var getTag = require_getTag();
-      var mapToArray = require_mapToArray();
-      var setToPairs = require_setToPairs();
-      var mapTag = "[object Map]";
-      var setTag = "[object Set]";
-      function createToPairs(keysFunc) {
-        return function(object) {
-          var tag = getTag(object);
-          if (tag == mapTag) {
-            return mapToArray(object);
-          }
-          if (tag == setTag) {
-            return setToPairs(object);
-          }
-          return baseToPairs(object, keysFunc(object));
-        };
-      }
-      module.exports = createToPairs;
-    }
-  });
-
-  // node_modules/lodash/toPairs.js
-  var require_toPairs = __commonJS({
-    "node_modules/lodash/toPairs.js"(exports, module) {
-      var createToPairs = require_createToPairs();
-      var keys = require_keys();
-      var toPairs = createToPairs(keys);
-      module.exports = toPairs;
     }
   });
 
@@ -45560,17 +45400,12 @@
       Object.defineProperty(exports, "__esModule", {
         value: true
       });
-      exports.createMemoizeFactoryWithDepth = exports.cacheMemo = void 0;
-      exports.getHash = getHash;
-      exports.weakMemo = exports.singleMemo = exports.once = exports.memoize = exports.isEqual = void 0;
+      exports.weakMemo = exports.singleMemo = exports.once = exports.memoize = exports.isEqual = exports.cacheMemo = void 0;
       var _reselect = require_lib10();
       var _lruCache = _interopRequireDefault(require_lru_cache());
-      var _isArray = _interopRequireDefault(require_isArray());
       var _isBoolean = _interopRequireDefault(require_isBoolean());
-      var _isDate = _interopRequireDefault(require_isDate());
       var _isFunction = _interopRequireDefault(require_isFunction());
       var _isObject = _interopRequireDefault(require_isObject());
-      var _toPairs = _interopRequireDefault(require_toPairs());
       var True = {
         "@webflow/Boolean": true
       };
@@ -45599,31 +45434,6 @@
         }
         return false;
       };
-      function getHash(value) {
-        let hash = "";
-        let element = null;
-        if (value && (0, _isFunction.default)(value.hashCode)) {
-          hash += value.hashCode();
-        } else if ((0, _isArray.default)(value)) {
-          hash += "[";
-          for (let i = 0; i < value.length; i++) {
-            element = value[i];
-            hash += ":" + getHash(element);
-          }
-          hash += "]";
-        } else if ((0, _isObject.default)(value) && !(0, _isDate.default)(value)) {
-          const keyValues = (0, _toPairs.default)(value).map(function(keyValue) {
-            return keyValue[0] + "=" + getHash(keyValue[1]);
-          });
-          keyValues.sort(function(keyValue1, keyValue2) {
-            return keyValue1[0].localeCompare(keyValue2[0]);
-          });
-          hash += keyValues.join("::");
-        } else {
-          hash += JSON.stringify(value);
-        }
-        return hash;
-      }
       var isEqual = (a, b) => {
         if (is(a, b)) {
           return true;
@@ -45665,22 +45475,6 @@
         return memFn;
       };
       exports.weakMemo = weakMemo;
-      var createMemoizeFactoryWithDepth = (depth) => {
-        const memoizeFn = (fn) => {
-          const cache = new _lruCache.default({
-            max: depth
-          });
-          return function() {
-            const hash = getHash(arguments);
-            if (!cache.has(hash)) {
-              cache.set(hash, fn.apply(this, arguments));
-            }
-            return cache.get(hash);
-          };
-        };
-        return memoizeFn;
-      };
-      exports.createMemoizeFactoryWithDepth = createMemoizeFactoryWithDepth;
       var cacheMemo = (depth) => {
         const memoizeFn = (fn) => {
           const cache = new _lruCache.default({
@@ -46065,8 +45859,8 @@
   // node_modules/lodash/isNumber.js
   var require_isNumber = __commonJS({
     "node_modules/lodash/isNumber.js"(exports, module) {
-      var baseGetTag = require_baseGetTag2();
-      var isObjectLike = require_isObjectLike2();
+      var baseGetTag = require_baseGetTag();
+      var isObjectLike = require_isObjectLike();
       var numberTag = "[object Number]";
       function isNumber(value) {
         return typeof value == "number" || isObjectLike(value) && baseGetTag(value) == numberTag;
@@ -47057,7 +46851,7 @@
   // node_modules/lodash/_cloneSymbol.js
   var require_cloneSymbol = __commonJS({
     "node_modules/lodash/_cloneSymbol.js"(exports, module) {
-      var Symbol2 = require_Symbol2();
+      var Symbol2 = require_Symbol();
       var symbolProto = Symbol2 ? Symbol2.prototype : void 0;
       var symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
       function cloneSymbol(symbol) {
@@ -47135,7 +46929,7 @@
   var require_baseIsMap = __commonJS({
     "node_modules/lodash/_baseIsMap.js"(exports, module) {
       var getTag = require_getTag();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var mapTag = "[object Map]";
       function baseIsMap(value) {
         return isObjectLike(value) && getTag(value) == mapTag;
@@ -47160,7 +46954,7 @@
   var require_baseIsSet = __commonJS({
     "node_modules/lodash/_baseIsSet.js"(exports, module) {
       var getTag = require_getTag();
-      var isObjectLike = require_isObjectLike2();
+      var isObjectLike = require_isObjectLike();
       var setTag = "[object Set]";
       function baseIsSet(value) {
         return isObjectLike(value) && getTag(value) == setTag;
@@ -47322,7 +47116,7 @@
       var baseCreate = require_baseCreate();
       var baseForOwn = require_baseForOwn();
       var baseIteratee = require_baseIteratee();
-      var getPrototype = require_getPrototype2();
+      var getPrototype = require_getPrototype();
       var isArray = require_isArray();
       var isBuffer = require_isBuffer();
       var isFunction = require_isFunction();
@@ -47889,6 +47683,7 @@
           return this.pills;
         }
         // hacky fake option set compat
+        // eslint-disable-next-line accessor-pairs
         set selectedIndex(index) {
           const pill = this.pills[index] || null;
           this.emitSelected(pill);
@@ -48403,7 +48198,7 @@
       var anObject = require_an_object();
       var isObject = require_is_object();
       var $toString = require_to_string();
-      var create = require_object_create();
+      var create2 = require_object_create();
       var createPropertyDescriptor = require_create_property_descriptor();
       var getIterator = require_get_iterator();
       var getIteratorMethod = require_get_iterator_method();
@@ -48703,7 +48498,7 @@
               if (!headersHas(headers, "content-type")) {
                 headersSet(headers, "content-type", "application/x-www-form-urlencoded;charset=UTF-8");
               }
-              return create(init, {
+              return create2(init, {
                 body: createPropertyDescriptor(0, $toString(body)),
                 headers: createPropertyDescriptor(0, headers)
               });
@@ -48853,7 +48648,7 @@
       }
       function getRedirectPath() {
         const queryString = window.location.search;
-        const redirectParam = queryString.match(/[?|&]usredir=([^&]+)/g);
+        const redirectParam = queryString.match(/[?|&]usredir=([^@&?=]+)/g);
         if (!redirectParam)
           return void 0;
         const encodedPath = redirectParam[0].substring("?usredir=".length);
@@ -48869,14 +48664,24 @@
         }
         window.location = location + `?usredir=${encodedPath}`;
       }
+      function normalizedRedirectPath(path) {
+        const hasLeadingSymbol = /\/|\.|\@/g.test(path[0]);
+        return hasLeadingSymbol ? path.substring(1) : path;
+      }
       function handleRedirect(defaultRedirectPath, includeDelay = false) {
         const redirectPath = getRedirectPath();
-        if (redirectPath) {
-          return includeDelay ? setTimeout(() => window.Webflow.location(redirectPath), 3e3) : window.Webflow.location(redirectPath);
-        }
-        if (!defaultRedirectPath)
+        const redirectUrl = (() => {
+          if (redirectPath) {
+            return `${window.location.origin}/${normalizedRedirectPath(redirectPath)}`;
+          }
+          if (defaultRedirectPath) {
+            return `${window.location.origin}/${normalizedRedirectPath(defaultRedirectPath)}`;
+          }
           return;
-        return includeDelay ? setTimeout(() => window.Webflow.location(defaultRedirectPath), 3e3) : window.Webflow.location(defaultRedirectPath);
+        })();
+        if (!redirectUrl)
+          return;
+        return includeDelay ? setTimeout(() => window.Webflow.location(redirectUrl), 3e3) : window.Webflow.location(redirectUrl);
       }
       var wrapperSelectors = [".w-file-upload-error"];
       var setErrorMsg = (wrapper, fieldElements, name) => {
@@ -49949,8 +49754,8 @@
           }
           const dataPath = field && field.includes(_constants3.RESERVED_USER_PREFIX) ? _constants3.KEY_FROM_RESERVED_USER_FIELD[field] : `f_${field}`;
           const value = (0, _get.default)(userData, [dataPath], "");
-          if (node.type === "checkbox") {
-            node.checked = Boolean(value);
+          if (node.type === "checkbox" && node.checked !== Boolean(value) && node.click) {
+            node.click();
             return;
           }
           node.value = value;
@@ -54839,9 +54644,19 @@
   var require_webflow_commerce = __commonJS({
     "shared/render/plugins/Commerce/webflow-commerce.js"(exports, module) {
       var Webflow = require_webflow_lib();
-      var commerce = require_modules();
+      var {
+        design,
+        destroy,
+        init,
+        preview
+      } = require_modules();
       Webflow.define("commerce", module.exports = function() {
-        return commerce;
+        return {
+          design,
+          destroy,
+          init,
+          preview
+        };
       });
     }
   });
@@ -56386,7 +56201,6 @@
   // <stdin>
   require_webflow_brand();
   require_webflow_focus_visible();
-  require_webflow_focus_within();
   require_webflow_focus();
   require_webflow_ix2_events();
   require_webflow_ix2();
